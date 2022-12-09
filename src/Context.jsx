@@ -12,7 +12,7 @@ function ContextProvider(props) {
     });
   }
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   useEffect(() => {
     fetch(
@@ -35,7 +35,9 @@ function ContextProvider(props) {
   }
 
   return (
-    <Context.Provider value={{ allPhotos, toggleFavorite, addToCart }}>
+    <Context.Provider
+      value={{ allPhotos, toggleFavorite, addToCart, cartItems }}
+    >
       {props.children}
     </Context.Provider>
   );
