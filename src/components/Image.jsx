@@ -30,14 +30,14 @@ function Image({ className, img }) {
       return (
         <i
           className="ri-shopping-cart-fill cart"
-          onClick={() => context.addToCart(img)}
+          onClick={() => context.changeCart(img)}
         ></i>
       );
     } else if (hovered) {
       return (
         <i
           className="ri-add-circle-line cart"
-          onClick={() => context.addToCart(img)}
+          onClick={() => context.changeCart(img)}
         ></i>
       );
     }
