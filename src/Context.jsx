@@ -18,13 +18,9 @@ function ContextProvider(props) {
     }
   }
 
-  // function removeFromCart(id) {
-  //   setCartItems((prev) => {
-  //     return prev.filter((item) => item.id !== id);
-  //   });
-  // }
-
-  // console.log(cartItems);
+  function emptyCart() {
+    setCartItems([]);
+  }
 
   useEffect(() => {
     fetch(
@@ -53,6 +49,7 @@ function ContextProvider(props) {
         toggleFavorite,
         changeCart,
         cartItems,
+        emptyCart,
       }}
     >
       {props.children}
