@@ -4,6 +4,15 @@ const Context = createContext();
 
 function ContextProvider(props) {
   const [allPhotos, setAllPhotos] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  function addToCart(item) {
+    setCartItems((prev) => {
+      return [...prev, item];
+    });
+  }
+
+  console.log(cartItems);
 
   useEffect(() => {
     fetch(
@@ -15,8 +24,20 @@ function ContextProvider(props) {
       });
   }, []);
 
+  function toggleFavorite(id) {
+    setAllPhotos((prev) =>
+      prev.map((photo) => {
+        return photo.id === id
+          ? { ...photo, isFavorite: !photo.isFavorite }
+          : photo;
+      })
+    );
+  }
+
   return (
-    <Context.Provider value={{ allPhotos }}>{props.children}</Context.Provider>
+    <Context.Provider value={{ allPhotos, toggleFavorite, addToCart }}>
+      {props.children}
+    </Context.Provider>
   );
 }
 
