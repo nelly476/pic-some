@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Context } from "../Context";
 import PropTypes from "prop-types";
 
-function Image({ className, img, addToCart }) {
+function Image({ className, img }) {
   const [hovered, setHovered] = useState(false);
 
   const context = useContext(Context);
@@ -25,12 +25,23 @@ function Image({ className, img, addToCart }) {
     }
   }
 
-  const cartIcon = hovered && (
-    <i
-      className="ri-add-circle-line cart"
-      onClick={() => context.addToCart(img)}
-    ></i>
-  );
+  function cartIcon() {
+    if (context.cartItems.some((item) => item.id === img.id)) {
+      return (
+        <i
+          className="ri-shopping-cart-fill cart"
+          onClick={() => context.addToCart(img)}
+        ></i>
+      );
+    } else if (hovered) {
+      return (
+        <i
+          className="ri-add-circle-line cart"
+          onClick={() => context.addToCart(img)}
+        ></i>
+      );
+    }
+  }
 
   return (
     <div
@@ -40,7 +51,7 @@ function Image({ className, img, addToCart }) {
     >
       <img src={img.url} className="image-grid" />
       {heartIcon()}
-      {cartIcon}
+      {cartIcon()}
     </div>
   );
 }
